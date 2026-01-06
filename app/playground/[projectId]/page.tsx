@@ -59,7 +59,6 @@ function PlayGround({
             SendMessage(input)
         }}/>
         <WebSiteDesign />
-        <ElementSettingSection />
       </div>
     </div>
   );
