@@ -42,15 +42,38 @@ export const Hero = () => {
         return number;
     }
 
+    function generateProjectName() {
+        const adjectives = [
+            "Nova", "Vibe", "Zen", "Echo", "Quantum",
+            "Neon", "Rapid", "Cosmic", "Pulse", "Astro"
+        ];
+
+        const nouns = [
+            "Craft", "Forge", "Stack", "Flow", "Labs",
+            "AI", "Build", "Hub", "Core", "Engine"
+        ];
+
+        const suffixes = ["", "X", "Pro", "ly", "ify"];
+
+        const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+        const noun = nouns[Math.floor(Math.random() * nouns.length)];
+        const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+
+        return `${adj}${noun}${suffix}`;
+    }
+
     const CreateNewProject = async () => {
         if (!inputValue) return toast.error("Please enter a prompt first");
         setLoading(true);
         const projectId = uuidv4();
         const frameId = generateRandomFrameNumber();
         const messages = [{ role: "user", content: inputValue }];
+        const projectName = generateProjectName();
         try {
-            const result = await axios.post("/api/projects", {
+            const result = await axios.post("/api/create-project", {
                 projectId: projectId,
+                name: projectName,
+                description:"",
                 frameId: frameId,
                 messages: messages,
             })

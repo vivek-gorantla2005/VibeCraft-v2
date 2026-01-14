@@ -4,6 +4,8 @@
 
 import * as Sentry from "@sentry/nextjs";
 
+export const enabled = process.env.NODE_ENV === 'production';
+
 Sentry.init({
   dsn: "https://0f633f2ed3eca92080170f1eef397119@o4510660315054080.ingest.us.sentry.io/4510660319969280",
 
